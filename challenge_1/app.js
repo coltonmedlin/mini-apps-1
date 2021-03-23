@@ -38,7 +38,9 @@ const BoardView = {
  ****************************************************/
 const App = {
   boardClick: (id) => {
-
+    [row, col] = id.split('-');
+    console.log('ROW', row);
+    console.log('COL', col);
   },
 
   resetClick: () => {
