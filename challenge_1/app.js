@@ -18,7 +18,7 @@ const BoardLogic = {
   },
 
   clear: () => {
-    return 1;
+
   }
 };
 
@@ -37,7 +37,7 @@ const BoardView = {
  * CONTROLLER
  ****************************************************/
 const App = {
-  boardClick: () => {
+  boardClick: (id) => {
 
   },
 
