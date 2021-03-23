@@ -10,7 +10,8 @@ const BoardLogic = {
     ],
 
   setPiece: (row, col) => {
-
+    BoardLogic._board[row][col] = BoardLogic._nextPiece;
+    BoardLogic._nextPiece = (BoardLogic._nextPiece === 'X' ? 'O' : 'X');
   },
 
   checkForWinner: () => {
@@ -29,8 +30,16 @@ const BoardLogic = {
 const BoardView = {
   update: () => {
 
+  },
+
+  clear: () => {
+
+  },
+
+  winner: (winner) => {
+
   }
-}
+};
 
 
 /****************************************************
@@ -39,14 +48,19 @@ const BoardView = {
 const App = {
   boardClick: (id) => {
     [row, col] = id.split('-');
-    console.log('ROW', row);
-    console.log('COL', col);
+    BoardLogic.setPiece(row, col);
+    BoardView.update();
+    const winner = BoardLogic.checkForWinner();
+    if (winner) {
+      BoardView.winner(winner);
+    }
   },
 
   resetClick: () => {
-
+    BoardLogic.clear();
+    BoardView.clear();
   }
-}
+};
 
 
 //FOR TESTING

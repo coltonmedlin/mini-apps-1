@@ -31,6 +31,7 @@ describe('User Clicks', () => {
       ['', '', ''],
       ['', '', '']
     ];
+    app.BoardLogic._nextPiece = 'X';
   });
 });
 
@@ -90,6 +91,7 @@ describe('Board Logic Functions', () => {
       ['', '', ''],
       ['', '', '']
     ];
+    app.BoardLogic._nextPiece = 'X';
   });
 
 });
