@@ -2,24 +2,24 @@
  * MODEL
  ****************************************************/
 const BoardLogic = {
-   _nextPiece: 'X';
+   _nextPiece: 'X',
    _board: [
       ['', '', ''],
       ['', '', ''],
       ['', '', '']
-    ];
+    ],
 
   setPiece: (row, col) => {
 
-  };
+  },
 
   checkForWinner: () => {
 
-  };
+  },
 
   clear: () => {
-
-  };
+    return 1;
+  }
 };
 
 
@@ -39,9 +39,15 @@ const BoardView = {
 const App = {
   boardClick: () => {
 
-  };
+  },
 
   resetClick: () => {
 
-  };
+  }
 }
+
+
+//FOR TESTING
+exports.BoardLogic = BoardLogic;
+exports.BoardView = BoardView;
+exports.App = App;
