@@ -1,7 +1,7 @@
 const assert = require('assert');
 const app = require('../app.js');
 
-describe('User Clicks', () => {
+xdescribe('User Clicks', () => {
 
   it('a click should add an X then O', () => {
      app.App.boardClick('0-0');
