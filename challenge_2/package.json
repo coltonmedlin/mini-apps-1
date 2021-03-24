@@ -1,0 +1,23 @@
+{
+  "name": "challenge_2",
+  "version": "1.0.0",
+  "description": "converts json to csv",
+  "main": "server.js",
+  "scripts": {
+    "test": "test",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/coltonmedlin/rpt27-mini-apps-1.git"
+  },
+  "author": "Colton Medlin - HR-RPT27",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/coltonmedlin/rpt27-mini-apps-1/issues"
+  },
+  "homepage": "https://github.com/coltonmedlin/rpt27-mini-apps-1#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
