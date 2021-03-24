@@ -5,9 +5,11 @@ const bodyParser = require('body-parser');
 
 app.use(express.static('client'));
 app.use(bodyParser());
+app.set('view engine', 'pug');
 
 app.post('/', (req, res) => {
-  console.log(req.body);
+  const text = req.body.textarea;
+  res.render('afterSubmission', {csv: text});
 });
 
 app.listen(port, () => {

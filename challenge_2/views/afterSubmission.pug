@@ -1,0 +1,12 @@
+doctype html
+head
+  script(src='app.js')
+h1 CSV REPORT GENERATOR
+div #{csv}
+br
+form(method='POST')
+  label ENTER JSON
+  br
+  textarea#text(name='textarea' rows='10' cols='50')
+  br
+  input(type='submit' value='SUBMIT')
