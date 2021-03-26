@@ -1,7 +1,7 @@
 
 
-module.exports.jsonToCsv = (req, res, next) => {
-  const jsonInput = JSON.parse(req.body.textarea);
+module.exports.jsonToCsv = (json) => {
+  const jsonInput = JSON.parse(json);
   let csv = '';
 
   //add the ids to the top row
@@ -49,6 +49,5 @@ module.exports.jsonToCsv = (req, res, next) => {
   csv = csv.slice(0, -1);
 
   console.log(csv);
-  req.body.csv = csv;
-  next();
+  return csv;
 };

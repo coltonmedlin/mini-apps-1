@@ -4,9 +4,9 @@ head
 h1 CSV REPORT GENERATOR
 p(style='white-space:pre') #{csv}
 br
-form(method='POST')
+form(method='POST' enctype='multipart/form-data')
   label ENTER JSON
   br
-  textarea#text(name='textarea' rows='10' cols='50')
+  input(name='file' id='file' type='file' accept='.json')
   br
   input(type='submit' value='SUBMIT')
