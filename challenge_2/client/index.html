@@ -1,14 +1,17 @@
 <!DOCTYPE html>
 <head>
-<script src="app.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="app.js"></script>
 </head>
 <body>
 <h1>CSV REPORT GENERATOR</h1>
-<form method="POST" enctype="multipart/form-data">
+<div id="response"></div>
+<form method="POST" enctype="multipart/form-data" id="form">
   <label>UPLOAD JSON FILE</label><br>
   <input type="file" name="file" id="file" accept=".json">
   <input type="submit" value="SUBMIT">
 </form>
+<button class="test">TEST</button>
 </body>
 </html>
 
