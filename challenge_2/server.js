@@ -15,7 +15,12 @@ app.set('view engine', 'pug');
 app.post('/', upload.single('file'), (req, res) => {
   fs.readFile(req.file.path, 'utf8', (err, contents) => {
     const text = jsonToCsv.jsonToCsv(contents);
-    res.render('afterSubmission', {csv: text});
+    fs.writeFile('./uploads/converted.csv', text, (err) => {
+      fs.unlink(req.file.path, (err) => {
+        //res.sendFile('./uploads/converted.csv', {root:'/Users/coltonmedlin/Sites/HackReactor/rpt27-mini-apps-1/challenge_2'});
+        res.render('afterSubmission', {csv: text});
+      });
+    });
   });
 });
 
