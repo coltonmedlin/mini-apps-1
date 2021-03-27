@@ -22,6 +22,10 @@ app.post('/', upload.single('file'), (req, res) => {
   });
 });
 
+app.get('/file', (req, res) => {
+  res.sendFile('/uploads/converted.csv', {root:'.'});
+});
+
 app.listen(port, () => {
   console.log(`CSV report generator is listening at http:localhost:${port}`);
 });

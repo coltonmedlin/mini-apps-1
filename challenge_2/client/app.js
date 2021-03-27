@@ -1,5 +1,11 @@
 $('document').ready(() => {
 
+  const $response = $('#response');
+  const $download = $('#downloadDiv');
+  const $downloadButton = $('#downloadButton');
+
+  $download.hide();
+
   $('#form').submit((event) => {
     event.preventDefault();
     let formData = new FormData(document.getElementById("form"));
@@ -10,9 +16,15 @@ $('document').ready(() => {
       data: formData,
       processData: false,  // tell jQuery not to process the data
       contentType: false   // tell jQuery not to set contentType
-    }).done(function( data ) {
-        $('#response').append(data);
+    }).done((data) => {
+        $response.empty();
+        $response.append(data);
+        $download.show();
     });
+  });
+
+  $downloadButton.click((event) => {
+    window.location.assign('http://localhost:3000/file');
   });
 
 });
