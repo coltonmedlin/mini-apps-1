@@ -1,5 +1,3 @@
-
-
 class App extends React.Component {
 
   constructor(props) {
@@ -22,6 +20,7 @@ class App extends React.Component {
     this.nextPage = this.nextPage.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.init = this.init.bind(this);
   }
 
   nextPage () {
@@ -31,6 +30,8 @@ class App extends React.Component {
         this.setState({page: 'F2'});
       } else if (this.state.page === 'F2') {
         this.setState({page: 'F3'});
+      } else if (this.state.page === 'F3') {
+        this.setState({page: 'summary'});
       }
   }
 
@@ -39,15 +40,21 @@ class App extends React.Component {
   }
 
   handleSubmit (event) {
-    console.log('SUBMIT!')
     event.preventDefault();
     this.nextPage();
+  }
+
+  init () {
+    axios.get('http://localhost:1111/session')
+    .then((response) => {
+      console.log(response);
+    })
   }
 
   render () {
     if (this.state.page === 'checkout') {
       return(
-       <button onClick={this.nextPage}>checkout</button>
+       <button onClick={this.init}>checkout</button>
       )
     }
     if (this.state.page === 'F1') {
@@ -87,7 +94,7 @@ class App extends React.Component {
     if (this.state.page === 'F3') {
       return(
         <div>
-       <form>
+       <form onSubmit={this.handleSubmit}>
          <label>Credit Card: </label>
          <input type="text" name="creditCard" id="CreditCard" value={this.state.creditCard} onChange={this.handleChange}/> <br></br>
          <label>Expiration: </label>
@@ -96,8 +103,27 @@ class App extends React.Component {
          <input type="text" name="cvv" id="cvv" value={this.state.cvv} onChange={this.handleChange}/> <br></br>
          <label>Billing Zipcode: </label>
          <input type="text" name="billingZip" id="billingZip" value={this.state.billingZip} onChange={this.handleChange}/> <br></br>
-         <input type="submit" value="COMPLETE PURCHASE" />
+         <input type="submit" value="NEXT" />
        </form>
+        </div>
+      )
+    }
+    if (this.state.page === 'summary') {
+      return(
+        <div>
+      Name: {this.state.name} <br />
+      Email: {this.state.email} <br />
+      Password: {this.state.password} <br />
+      Address: {this.state.address} <br />
+      Address line two: {this.state.lineTwo} <br />
+      City: {this.state.city} <br />
+      State: {this.state.state} <br />
+      Zip Code: {this.state.zip} <br />
+      Credit Card:{this.state.creditCard} <br />
+      Expiration: {this.state.expiration} <br />
+      cvv: {this.state.cvv} <br />
+      Billing Zipcode: {this.state.billingZip} <br />
+      <button>COMPLETE PURCHASE</button>
         </div>
       )
     }
