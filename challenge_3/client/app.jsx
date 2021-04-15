@@ -15,12 +15,14 @@ class App extends React.Component {
       creditCard: '',
       expiration: '',
       cvv: '',
-      billingZip: ''
+      billingZip: '',
+      token: ''
     };
     this.nextPage = this.nextPage.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.init = this.init.bind(this);
+    this.completePurchase = this.completePurchase.bind(this);
   }
 
   nextPage () {
@@ -41,13 +43,37 @@ class App extends React.Component {
 
   handleSubmit (event) {
     event.preventDefault();
-    this.nextPage();
+    axios.post('http://localhost:1111/checkout', this.state)
+    .then((response) => {
+      this.nextPage();
+    });
+  }
+
+  completePurchase () {
+    this.setState({
+      page: 'checkout',
+      name: '',
+      email: '',
+      password: '',
+      address: '',
+      lineTwo: '',
+      city: '',
+      state: '',
+      zip: '',
+      creditCard: '',
+      expiration: '',
+      cvv: '',
+      billingZip: '',
+      token: ''
+    });
+    alert('PURCHASE SUCCESSFUL!');
   }
 
   init () {
     axios.get('http://localhost:1111/session')
     .then((response) => {
-      console.log(response);
+      this.setState({token: response.data});
+      this.nextPage();
     })
   }
 
@@ -123,7 +149,7 @@ class App extends React.Component {
       Expiration: {this.state.expiration} <br />
       cvv: {this.state.cvv} <br />
       Billing Zipcode: {this.state.billingZip} <br />
-      <button>COMPLETE PURCHASE</button>
+      <button onClick={this.completePurchase}>COMPLETE PURCHASE</button>
         </div>
       )
     }
