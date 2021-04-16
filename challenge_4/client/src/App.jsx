@@ -18,6 +18,8 @@ class App extends Component{
     };
     this.buttonClick = this.buttonClick.bind(this);
     this.setPiece = this.setPiece.bind(this);
+    this.checkWinRow = this.checkWinRow.bind(this);
+    this.checkWin = this.checkWin.bind(this);
   }
 
   setPiece (column) {
@@ -32,12 +34,35 @@ class App extends Component{
           this.setState({red: [...this.state.red, `${i}-${column}`]});
         }
         const turn = this.state.turn === 'black' ? 'red' : 'black';
-        this.setState({turn});
+        this.setState({turn, board});
         break;
       }
     }
     //EVENTUALLY: check for a win
+    this.checkWin();
   }
+
+  checkWinRow () {
+    const board = this.state.board;
+    let win = false;
+    for (let i = 0; i < board.length; i++) {
+      if (!board[i].includes(0)) {
+        if (!(board[i].includes('B') && board.includes('R'))) {
+          win = true;
+          break;
+        }
+      }
+    }
+    return win;
+  }
+
+  checkWin () {
+    if(this.checkWinRow()) {
+      alert('WINNER');
+    }
+  }
+
+
 
 //CONTROLLER
   buttonClick (event) {
