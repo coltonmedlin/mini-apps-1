@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "server-start": "nodemon ./server/index.js",
-    "react-start": "webpack -d --watch"
+    "react-start": "webpack --mode development --watch"
   },
   "author": "",
   "license": "ISC",
