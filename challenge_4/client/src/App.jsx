@@ -20,6 +20,8 @@ class App extends Component{
     this.setPiece = this.setPiece.bind(this);
     this.checkWinRow = this.checkWinRow.bind(this);
     this.checkWin = this.checkWin.bind(this);
+    this.checkWinColumn = this.checkWinColumn.bind(this);
+    this.checkWinDiagonal = this.checkWinDiagonal.bind(this);
   }
 
   setPiece (column) {
@@ -38,7 +40,6 @@ class App extends Component{
         break;
       }
     }
-    //EVENTUALLY: check for a win
     this.checkWin();
   }
 
@@ -47,7 +48,7 @@ class App extends Component{
     let win = false;
     for (let i = 0; i < board.length; i++) {
       if (!board[i].includes(0)) {
-        if (!(board[i].includes('B') && board.includes('R'))) {
+        if (!(board[i].includes('B') && board[i].includes('R'))) {
           win = true;
           break;
         }
@@ -56,8 +57,47 @@ class App extends Component{
     return win;
   }
 
+  checkWinColumn () {
+    const board = this.state.board;
+    let win = false;
+    for (let i = 0; i < 4; i++) {
+      let column = [board[0][i], board[1][i], board[2][i], board[3][i]];
+      if (!column.includes(0)) {
+        if (!(column.includes('B') && column.includes('R'))) {
+          win = true;
+          break;
+        }
+      }
+    }
+    return win;
+  }
+
+  checkWinDiagonal () {
+    const board = this.state.board;
+    const diagonal1 = [board[0][0], board[1][1], board[2][2], board[3][3]];
+    const diagonal2 = [board[0][3], board[1][2], board[2][1], board[3][0]];
+    let win = false;
+    if (!diagonal1.includes(0)) {
+      if (!(diagonal1.includes('B') && diagonal1.includes('R'))) {
+        win = true;
+      }
+    }
+    if (!diagonal2.includes(0)) {
+      if (!(diagonal2.includes('B') && diagonal2.includes('R'))) {
+        win = true;
+      }
+    }
+    return win;
+  }
+
   checkWin () {
+    if(this.checkWinColumn()) {
+      alert('WINNER');
+    }
     if(this.checkWinRow()) {
+      alert('WINNER');
+    }
+    if (this.checkWinDiagonal()) {
       alert('WINNER');
     }
   }
