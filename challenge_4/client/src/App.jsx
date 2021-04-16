@@ -22,6 +22,8 @@ class App extends Component{
     this.checkWin = this.checkWin.bind(this);
     this.checkWinColumn = this.checkWinColumn.bind(this);
     this.checkWinDiagonal = this.checkWinDiagonal.bind(this);
+    this.checkDraw = this.checkDraw.bind(this);
+    this.clearBoard = this.clearBoard.bind(this);
   }
 
   setPiece (column) {
@@ -49,7 +51,7 @@ class App extends Component{
     for (let i = 0; i < board.length; i++) {
       if (!board[i].includes(0)) {
         if (!(board[i].includes('B') && board[i].includes('R'))) {
-          win = true;
+          win = board[i].includes('B') ? 'black' : 'red';
           break;
         }
       }
@@ -64,7 +66,7 @@ class App extends Component{
       let column = [board[0][i], board[1][i], board[2][i], board[3][i]];
       if (!column.includes(0)) {
         if (!(column.includes('B') && column.includes('R'))) {
-          win = true;
+          win = column.includes('B') ? 'black' : 'red';
           break;
         }
       }
@@ -79,29 +81,52 @@ class App extends Component{
     let win = false;
     if (!diagonal1.includes(0)) {
       if (!(diagonal1.includes('B') && diagonal1.includes('R'))) {
-        win = true;
+        win = diagonal1.includes('B') ? 'black' : 'red';
       }
     }
     if (!diagonal2.includes(0)) {
       if (!(diagonal2.includes('B') && diagonal2.includes('R'))) {
-        win = true;
+        win = diagonal2.includes('B') ? 'black' : 'red';
       }
     }
     return win;
   }
 
-  checkWin () {
-    if(this.checkWinColumn()) {
-      alert('WINNER');
-    }
-    if(this.checkWinRow()) {
-      alert('WINNER');
-    }
-    if (this.checkWinDiagonal()) {
-      alert('WINNER');
+  checkDraw () {
+    const board = this.state.board;
+    const all = [...board[0], ...board[1], ...board[2], ...board[3]];
+    if (all.includes(0)) {
+      return false
+    } else {
+      return true;
     }
   }
 
+  checkWin () {
+    if(this.checkWinColumn()) {
+      this.clearBoard()
+      alert(`${this.checkWinColumn()} wins!`);
+    } else if(this.checkWinRow()) {
+      alert(`${this.checkWinRow()} wins!`);
+    } else if (this.checkWinDiagonal()) {
+      alert(`${this.checkWinDiagonal()} wins!`);
+    } else if (this.checkDraw()) {
+      alert('it\'s a draw!');
+    }
+  }
+
+  clearBoard () {
+    const board = [
+      [0, 0, 0, 0],
+      [0, 0, 0, 0],
+      [0, 0, 0, 0],
+      [0, 0, 0, 0]
+    ];
+    const black = [];
+    const red = [];
+    const turn = 'black';
+    this.setState({board, black, red, turn});
+  }
 
 
 //CONTROLLER
